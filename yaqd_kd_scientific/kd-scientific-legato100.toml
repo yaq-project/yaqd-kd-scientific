@@ -1,6 +1,6 @@
 protocol = "kd-scientific-legato100"
 doc = ""
-traits = ["has-position", "uses-serial", "is-daemon"]
+traits = ["is-discrete", "has-position", "uses-uart", "uses-serial", "is-daemon"]
 
 [links]
 source = "https://github.com/yaq-project/yaqd-kd-scientific"
@@ -12,6 +12,12 @@ conda-forge = "https://anaconda.org/conda-forge/yaqd-kd-scientific"
 
 
 [config]
+
+[config.identifiers]
+default = {"run" = 1, "stop" = 0}
+
+[config.baud_rate]
+default = 115200
 
 [state]
 
