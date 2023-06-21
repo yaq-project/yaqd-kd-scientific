@@ -1,7 +1,7 @@
 __all__ = ["KdScientificLegato100"]
 
 import asyncio
-import serial
+import serial  # type: ignore
 from typing import Dict, Any, List
 
 from yaqd_core import IsDaemon, HasPosition, UsesSerial, IsDiscrete, UsesUart
