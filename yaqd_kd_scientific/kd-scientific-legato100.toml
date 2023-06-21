@@ -1,0 +1,19 @@
+protocol = "kd-scientific-legato100"
+doc = ""
+traits = ["has-position", "uses-serial", "is-daemon"]
+
+[links]
+source = "https://github.com/yaq-project/yaqd-kd-scientific"
+bugtracker = "https://github.com/yaq-project/yaqd-kd-scientific/-/issues"
+
+[installation]
+PyPI = "https://pypi.org/project/yaqd-kd-scientific"
+conda-forge = "https://anaconda.org/conda-forge/yaqd-kd-scientific"
+
+
+[config]
+
+[state]
+
+[messages]
+
