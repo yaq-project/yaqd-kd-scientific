@@ -14,8 +14,7 @@ class KdScientificLegato100(IsDiscrete, HasPosition, UsesUart, UsesSerial, IsDae
         super().__init__(name, config, config_filepath)
         # Perform any unique initialization
         self._ser = serial.Serial("/dev/cu.usbmodem11075471")
-        #self._ser.baudrate = self._config["baud_rate"]
-
+        # self._ser.baudrate = self._config["baud_rate"]
 
     def _set_position(self, position) -> None:
         if position >= 0.5:
