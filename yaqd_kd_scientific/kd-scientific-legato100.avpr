@@ -1,10 +1,27 @@
 {
     "config": {
+        "baud_rate": {
+            "default": 115200,
+            "origin": "uses-uart",
+            "type": "int"
+        },
         "enable": {
             "default": true,
             "doc": "Disable this daemon. The kind entry-point will not attempt to start this daemon.",
             "origin": "is-daemon",
             "type": "boolean"
+        },
+        "identifiers": {
+            "default": {
+                "run": 1,
+                "stop": 0
+            },
+            "doc": "Position identifiers",
+            "origin": "is-discrete",
+            "type": {
+                "type": "map",
+                "values": "double"
+            }
         },
         "log_level": {
             "default": "info",
@@ -60,6 +77,10 @@
                 "null",
                 "string"
             ]
+        },
+        "serial_port": {
+            "origin": "uses-uart",
+            "type": "string"
         }
     },
     "doc": "",
@@ -107,11 +128,38 @@
             "request": [],
             "response": "double"
         },
+        "get_identifier": {
+            "doc": "Get current identifier string. Current identifier may be None.",
+            "origin": "is-discrete",
+            "request": [],
+            "response": [
+                "null",
+                "string"
+            ]
+        },
         "get_position": {
             "doc": "Get current daemon position.",
             "origin": "has-position",
             "request": [],
             "response": "double"
+        },
+        "get_position_identifier_options": {
+            "doc": "Get position identifier names. Identifiers may not change at runtime.",
+            "origin": "is-discrete",
+            "request": [],
+            "response": {
+                "items": "string",
+                "type": "array"
+            }
+        },
+        "get_position_identifiers": {
+            "doc": "Get position identifiers. Identifiers may not change at runtime.",
+            "origin": "is-discrete",
+            "request": [],
+            "response": {
+                "type": "map",
+                "values": "double"
+            }
         },
         "get_state": {
             "doc": "Get version of the running daemon",
@@ -139,6 +187,17 @@
                     "string"
                 ]
             }
+        },
+        "set_identifier": {
+            "doc": "Set using an identifier. Returns new destination.",
+            "origin": "is-discrete",
+            "request": [
+                {
+                    "name": "identifier",
+                    "type": "string"
+                }
+            ],
+            "response": "double"
         },
         "set_position": {
             "doc": "Give the daemon a new destination, and begin motion towards that destination.",
@@ -197,6 +256,17 @@
             "setter": null,
             "type": "double",
             "units_getter": "get_units"
+        },
+        "position_identifier": {
+            "control_kind": "hinted",
+            "dynamic": true,
+            "getter": "get_identifier",
+            "limits_getter": null,
+            "options_getter": "get_position_identifier_options",
+            "record_kind": "data",
+            "setter": "set_identifier",
+            "type": "string",
+            "units_getter": null
         }
     },
     "protocol": "kd-scientific-legato100",
@@ -211,12 +281,23 @@
             "default": NaN,
             "origin": "has-position",
             "type": "double"
+        },
+        "position_identifier": {
+            "default": null,
+            "doc": "Current position identifier.",
+            "origin": "is-discrete",
+            "type": [
+                "null",
+                "string"
+            ]
         }
     },
     "traits": [
         "has-position",
         "is-daemon",
-        "uses-serial"
+        "is-discrete",
+        "uses-serial",
+        "uses-uart"
     ],
     "types": [
         {
