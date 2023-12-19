@@ -14,7 +14,7 @@ conda-forge = "https://anaconda.org/conda-forge/yaqd-kd-scientific"
 [config]
 
 [config.identifiers]
-default = {"run" = 1, "stop" = 0}
+default = {"infusing" = 1, "paused" = 0}
 
 [config.baud_rate]
 default = 115200
@@ -22,4 +22,3 @@ default = 115200
 [state]
 
 [messages]
-
