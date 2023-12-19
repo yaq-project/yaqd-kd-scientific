@@ -13,8 +13,8 @@
         },
         "identifiers": {
             "default": {
-                "run": 1,
-                "stop": 0
+                "infusing": 1,
+                "paused": 0
             },
             "doc": "Position identifiers",
             "origin": "is-discrete",
