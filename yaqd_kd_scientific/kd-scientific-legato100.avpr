@@ -84,6 +84,9 @@
         }
     },
     "doc": "",
+    "hardware": [
+        "kd-scientific:legato100"
+    ],
     "installation": {
         "PyPI": "https://pypi.org/project/yaqd-kd-scientific",
         "conda-forge": "https://anaconda.org/conda-forge/yaqd-kd-scientific"
