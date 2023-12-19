@@ -37,7 +37,6 @@ class KdScientificLegato100(IsDiscrete, HasPosition, UsesUart, UsesSerial, IsDae
             self._ser.write("stop\r\n".encode())
             # send serial command to STOP
 
-
     async def update_state(self):
         while True:
             line = (await self._ser.areadline()).decode().strip()
