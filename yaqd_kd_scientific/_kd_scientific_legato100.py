@@ -20,10 +20,18 @@ class KdScientificLegato100(IsDiscrete, HasPosition, UsesUart, UsesSerial, IsDae
     def direct_serial_write(self, bytes) -> None:
         self._ser.write(bytes)
 
+    def get_rate(self) -> float:
+        return self._rate
+
     async def poll_status(self):
         while True:
             self._ser.write("status\r\n".encode())
-            await asyncio.sleep(1)
+            await asyncio.sleep(0.5)
+            self._ser.write("irate\r\n".encode())
+            await asyncio.sleep(0.5)
+
+    def rate_units(self) -> str:
+        return self._rate_units
 
     def _set_position(self, position) -> None:
         if position >= 0.5:
@@ -37,6 +45,10 @@ class KdScientificLegato100(IsDiscrete, HasPosition, UsesUart, UsesSerial, IsDae
             self._ser.write("stop\r\n".encode())
             # send serial command to STOP
 
+    def set_rate(self, rate: float):
+        command = f"irate {rate}, {self._rate_units}\r\n"
+        self._ser.write(command.encode())
+
     async def update_state(self):
         while True:
             line = (await self._ser.areadline()).decode().strip()
@@ -48,4 +60,11 @@ class KdScientificLegato100(IsDiscrete, HasPosition, UsesUart, UsesSerial, IsDae
                 else:
                     self._state["position"] = 0.0
                     self._state["position_identifier"] = "paused"
+            else:
+                try:
+                    r, u = line.split()
+                    self._rate = float(r)
+                    self._rate_units = u
+                except:
+                    pass
             await asyncio.sleep(0.1)
