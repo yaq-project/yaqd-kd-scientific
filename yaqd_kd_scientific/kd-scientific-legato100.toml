@@ -22,3 +22,25 @@ default = 115200
 [state]
 
 [messages]
+
+[messages.get_rate]
+doc = "Get current rate, in units specified within config."
+response = "double"
+
+[messages.set_rate]
+doc = "Set current rate, in units specified within config."
+request = [{"name"="rate", "type"="double"}]
+
+[messages.rate_units]
+doc = "Rate units."
+response = "string"
+
+[properties]
+
+[properties.rate]
+type = "double"
+getter = "get_rate"
+setter = "set_rate"
+units_getter = "rate_units"
+control_kind = "hinted"
+record_kind = "metadata"

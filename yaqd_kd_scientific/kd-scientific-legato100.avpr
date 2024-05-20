@@ -164,6 +164,11 @@
                 "values": "double"
             }
         },
+        "get_rate": {
+            "doc": "Get current rate, in units specified within config.",
+            "request": [],
+            "response": "double"
+        },
         "get_state": {
             "doc": "Get version of the running daemon",
             "origin": "is-daemon",
@@ -191,6 +196,11 @@
                 ]
             }
         },
+        "rate_units": {
+            "doc": "Rate units.",
+            "request": [],
+            "response": "string"
+        },
         "set_identifier": {
             "doc": "Set using an identifier. Returns new destination.",
             "origin": "is-discrete",
@@ -208,6 +218,16 @@
             "request": [
                 {
                     "name": "position",
+                    "type": "double"
+                }
+            ],
+            "response": "null"
+        },
+        "set_rate": {
+            "doc": "Set current rate, in units specified within config.",
+            "request": [
+                {
+                    "name": "rate",
                     "type": "double"
                 }
             ],
@@ -270,6 +290,17 @@
             "setter": "set_identifier",
             "type": "string",
             "units_getter": null
+        },
+        "rate": {
+            "control_kind": "hinted",
+            "dynamic": true,
+            "getter": "get_rate",
+            "limits_getter": null,
+            "options_getter": null,
+            "record_kind": "metadata",
+            "setter": "set_rate",
+            "type": "double",
+            "units_getter": "rate_units"
         }
     },
     "protocol": "kd-scientific-legato100",
